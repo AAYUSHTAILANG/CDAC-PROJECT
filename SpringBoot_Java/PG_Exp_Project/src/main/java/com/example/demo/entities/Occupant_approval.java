@@ -1,0 +1,112 @@
+package com.example.demo.entities;
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="occupant_approval")
+public class Occupant_approval {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@OneToOne
+	@JoinColumn(name="occupant_id")
+	private Occupant occupant_id;
+	@OneToOne
+	@JoinColumn(name="property_id")
+	private Property property_id;
+	
+	@Column
+	private int  approval_status;
+
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="request_date")
+	private LocalDate request_date;
+	
+	
+
+	public Occupant_approval() {
+		super();
+	}
+
+	public Property getProperty_id() {
+		return property_id;
+	}
+
+	public void setProperty_id(Property property_id) {
+		this.property_id = property_id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Occupant getOccupant_id() {
+		return occupant_id;
+	}
+
+	public void setOccupant_id(Occupant occupant_id) {
+		this.occupant_id = occupant_id;
+	}
+
+	
+
+	public int getApproval_status() {
+		return approval_status;
+	}
+
+	public void setApproval_status(int approval_status) {
+		this.approval_status = approval_status;
+	}
+
+	public LocalDate getRequest_date() {
+		return request_date;
+	}
+
+	public void setRequest_date(LocalDate request_date) {
+		this.request_date = request_date;
+	}
+
+	public Occupant_approval(int id, Occupant occupant_id, Property property_id, int approval_status,
+			LocalDate request_date) {
+		super();
+		this.id = id;
+		this.occupant_id = occupant_id;
+		this.property_id = property_id;
+		this.approval_status = approval_status;
+		this.request_date = request_date;
+	}
+
+	public Occupant_approval(Occupant occ, Property p, int i, LocalDate localDate) {
+		this.occupant_id = occ;
+		this.property_id = p;
+		this.approval_status = i;
+		this.request_date= localDate;
+	}
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+}
