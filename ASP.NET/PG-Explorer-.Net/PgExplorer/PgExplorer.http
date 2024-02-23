@@ -1,0 +1,6 @@
+@PgExplorer_HostAddress = http://localhost:5102
+
+GET {{PgExplorer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
