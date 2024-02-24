@@ -1,0 +1,56 @@
+package com.example.demo.controllers;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Occupant;
+import com.example.demo.entities.Occupant_approval;
+import com.example.demo.entities.Property;
+import com.example.demo.entities.occRequestDummy;
+import com.example.demo.services.OccupantService;
+import com.example.demo.services.Occupant_approvalService;
+import com.example.demo.services.PropertyService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class Occupant_approvalController {
+	@Autowired
+	Occupant_approvalService occ_app_service;
+	@Autowired
+	OccupantService occ_service;
+	@Autowired
+	PropertyService prop_service;
+	
+	@GetMapping("/showRequest/{owner_id}")
+	public List<Occupant_approval> showRequest()
+	{
+		return occ_app_service.getRequest();
+	}
+	
+	
+	@PostMapping("/sendRequest/{occupant_id}/{property_id}")
+	public Occupant_approval sendRequest(@RequestBody occRequestDummy ord)
+	{
+		Occupant occ = occ_service.getOccupant(ord.getOccupant_id());
+		Property p = prop_service.getProperty(ord.getProperty_id());
+		
+		Occupant_approval oa = new Occupant_approval(occ,p,0,LocalDate.now());
+		return occ_app_service.saveRequest(oa);
+	}
+	
+	@PutMapping("/updateRequest/{id}")
+	public Occupant_approval updateRequest(@RequestBody Occupant_approval occa,@PathVariable int id)
+	{
+		return occ_app_service.updateRequest(occa,id);
+	}
+	
+}

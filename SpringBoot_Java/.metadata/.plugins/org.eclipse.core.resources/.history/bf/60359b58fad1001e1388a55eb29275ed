@@ -1,0 +1,26 @@
+package com.example.demo.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Occupant_approval;
+import com.example.demo.entities.Roles;
+import com.example.demo.entities.Users;
+@Repository
+public interface UsersReopository extends JpaRepository<Users, Integer> {
+
+	@Query("select l from Users l where l.user_email = :user_email and l.user_password = :user_password")
+	public Optional<Users> getLogin(String user_email,String user_password);
+	
+	/*@Query("select u from Users u where user_active_status = false and user_role = 2")
+	public List<Users> getOwnerRequest();
+*/
+	public Users getByuser_Id(Users user_id);
+	
+}
+

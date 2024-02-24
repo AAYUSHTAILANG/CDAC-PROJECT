@@ -1,0 +1,70 @@
+package com.example.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Area;
+import com.example.demo.entities.City;
+import com.example.demo.entities.Facility;
+import com.example.demo.entities.Occupant;
+import com.example.demo.entities.Owner;
+import com.example.demo.entities.Property;
+import com.example.demo.repository.AreaRepository;
+import com.example.demo.repository.PropertyRepository;
+
+@Service
+public class PropertyService {
+@Autowired
+	PropertyRepository prop_repo;
+	@Autowired
+	AreaService area_service;
+	@Autowired
+	OwnerService owner_service;
+	@Autowired
+	OccupantService occ_service;
+
+	public Iterable<Property> getAll()
+	{
+		return prop_repo.findAll();
+	}
+	
+	public Property getProperty(int id)
+	{
+		return prop_repo.findById(id).get();
+	}
+	
+	public Optional<Property> getOProperty(int property_id)
+	{
+		return prop_repo.findById(property_id);
+	}
+	
+	public Property saveProperty(Property p)
+    {
+    	return prop_repo.save(p);
+    }
+	
+	public List<Property> getPropertyByArea(int area_id) {
+		Optional<Area> a= area_service.getOptArea(area_id); 
+        return prop_repo.findByAreaId(a.get()); 
+	}
+	
+	public List<Property> getPropertyByOwnerId(int owner_id) {
+		Optional<Owner> a= owner_service.getOptOwner(owner_id); 
+        return prop_repo.getByOwnerId(a.get()); 
+	}
+
+	public int getDepositAmt(int id) {
+		Property p = prop_repo.findById(id).get();
+		return p.getPrice();
+	}
+	 
+	public List<Property> findByAreaId2(int area_id, int occupant_id) {
+		Optional<Area> a= area_service.getOptArea(area_id);
+		Optional<Occupant> o = occ_service.getOptOccupant(occupant_id);
+        return prop_repo.findByAreaId2(a.get(), o.get());
+    }
+	
+}

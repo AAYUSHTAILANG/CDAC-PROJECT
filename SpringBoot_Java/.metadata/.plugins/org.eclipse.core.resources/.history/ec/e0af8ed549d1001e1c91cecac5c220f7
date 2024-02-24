@@ -1,0 +1,27 @@
+package com.example.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.LoginCheck;
+import com.example.demo.entities.Users;
+import com.example.demo.services.UsersService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController 
+public class UsersController {
+	
+	@Autowired
+	UsersService users_service;
+	
+	@PostMapping("/checkLogin")
+	public Users checkLogin(@RequestBody LoginCheck lcheck)
+	{
+		return users_service.getLogin(lcheck.getUser_email(), lcheck.getUser_password());
+	}
+
+	
+}

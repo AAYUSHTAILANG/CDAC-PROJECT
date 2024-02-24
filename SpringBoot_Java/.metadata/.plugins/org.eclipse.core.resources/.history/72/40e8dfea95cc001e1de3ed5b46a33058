@@ -1,0 +1,38 @@
+package com.example.demo.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Facility;
+import com.example.demo.entities.Occupant;
+import com.example.demo.entities.Property;
+import com.example.demo.repository.PropertyRepository;
+
+@Service
+public class PropertyService {
+@Autowired
+	PropertyRepository prop_repo;
+
+	public Iterable<Property> getAll()
+	{
+		return prop_repo.findAll();
+	}
+	
+	public Property getProperty(int id)
+	{
+		return prop_repo.findById(id).get();
+	}
+	
+	public Property saveProperty(Property p)
+    {
+    	return prop_repo.save(p);
+    }
+
+	 public List<Property> searchPropertiesByArea(int areaId) {
+	        return prop_repo.findByAreaId(areaId);
+	    }
+	
+	
+}

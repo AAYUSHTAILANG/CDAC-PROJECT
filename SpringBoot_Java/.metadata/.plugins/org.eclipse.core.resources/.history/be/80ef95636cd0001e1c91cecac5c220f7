@@ -1,0 +1,13 @@
+package com.example.demo.entities;
+
+import java.time.LocalDate;
+
+public class BookingDummy {
+
+	private int occupant_id;
+	private int property_id;
+	private LocalDate date;
+	private int deposite;
+	private String trans_amt;
+	
+}

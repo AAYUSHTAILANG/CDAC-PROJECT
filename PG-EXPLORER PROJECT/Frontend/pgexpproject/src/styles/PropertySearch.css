@@ -1,0 +1,38 @@
+/* PropertySearch.css */
+/* Custom styles for PropertySearch component */
+
+.container {
+  padding-top: 20px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  width: 100%;
+}
+
+.table {
+  margin-top: 20px;
+}
+.btn-outline-blue {
+  color: #007bff;
+  border-color: #007bff;
+}
+.small-button {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.btn-outline-blue:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Optional: Add your custom styles here */

@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Property_facility;
+@Repository
+public interface Property_facilityRepository extends CrudRepository<Property_facility, Integer> {
+
+}

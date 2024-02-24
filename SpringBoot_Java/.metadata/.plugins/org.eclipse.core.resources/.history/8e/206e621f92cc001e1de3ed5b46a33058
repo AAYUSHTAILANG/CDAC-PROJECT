@@ -1,0 +1,13 @@
+package com.example.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.example.demo.entities.Property;
+
+public interface PropertyRepository extends CrudRepository<Property ,Integer> {
+
+	List<Property> findByCityAndArea(String area);
+	
+}

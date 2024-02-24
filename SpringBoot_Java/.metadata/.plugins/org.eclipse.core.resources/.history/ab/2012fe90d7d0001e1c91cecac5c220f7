@@ -1,0 +1,20 @@
+package com.example.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Occupant_approval;
+import com.example.demo.entities.Owner;
+import com.example.demo.entities.Property;
+@Repository
+public interface Occupant_approvalRepository extends CrudRepository<Occupant_approval, Integer> {
+	
+	@Query("select o from Occupant_approval o where approval_status = 0")
+	public List<Occupant_approval> getRequest();
+	
+	@Query("SELECT oa FROM Occupant_approval oa JOIN Property p ON oa.property = p WHERE p.owner = :o AND oa.approval_status = 0")
+	List<Occupant_approval> getByOwnerId(Owner o);
+}

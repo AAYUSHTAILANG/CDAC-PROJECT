@@ -1,0 +1,68 @@
+package com.example.demo.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+@Entity
+@Table(name="property_facility")
+public class Property_facility {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@OneToOne
+	@JoinColumn(name="property_id")
+	private Property propery_id;
+	
+	@OneToOne
+	@JoinColumn(name="facility_id")
+	private Facility facility_id;
+
+	public Property_facility() {
+		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Property getPropery_id() {
+		return propery_id;
+	}
+
+	public void setPropery_id(Property propery_id) {
+		this.propery_id = propery_id;
+	}
+
+	public Facility getFacility_id() {
+		return facility_id;
+	}
+
+	public void setFacility_id(Facility facility_id) {
+		this.facility_id = facility_id;
+	}
+
+	public Property_facility(int id, Property propery_id, Facility facility_id) {
+		super();
+		this.id = id;
+		this.propery_id = propery_id;
+		this.facility_id = facility_id;
+	}
+
+	public Property_facility(Property p1, Facility f) {
+		this.propery_id = p1;
+		this.facility_id = f;
+	}
+	
+	
+}

@@ -1,0 +1,27 @@
+package com.example.demo.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.ProFacility;
+import com.example.demo.entities.PropertyReg;
+import com.example.demo.entities.Property_facility;
+import com.example.demo.services.Property_facilityService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class Property_facilityController {
+	@Autowired
+	Property_facilityService prop_fac_serv;
+	
+	@PostMapping("/addFacility")
+	public Property_facility addFacility(@RequestBody ProFacility profac)
+	{
+		System.out.println(profac);
+		return null;
+	}
+
+}

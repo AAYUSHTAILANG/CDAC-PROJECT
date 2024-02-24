@@ -1,0 +1,17 @@
+package com.example.demo.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+
+import com.example.demo.entities.Area;
+import com.example.demo.entities.City;
+import com.example.demo.entities.Property;
+
+public interface PropertyRepository extends CrudRepository<Property ,Integer> {
+
+	@Query("select p from Property p where area_id = :aid")
+	 List<Property> findByAreaId(City aid);
+	
+}

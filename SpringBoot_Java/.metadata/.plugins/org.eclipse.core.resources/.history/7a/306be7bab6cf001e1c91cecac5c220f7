@@ -1,0 +1,35 @@
+package com.example.demo.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.City;
+import com.example.demo.entities.Facility;
+import com.example.demo.services.FacilityService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class FacilityController {
+	@Autowired
+	FacilityService facility_service;
+
+	@GetMapping("/facilities")
+	public Iterable<Facility> getAll()
+	{
+		return facility_service.getAll();
+	}
+	
+	@GetMapping("/facilities/{property_id}")
+	public List<Facility> getFacility(@PathVariable int property_id)
+	{
+		return facility_service.getFacilityByPropertyId(property_id);
+	}
+	
+	
+	
+}

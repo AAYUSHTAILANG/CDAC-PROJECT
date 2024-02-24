@@ -1,0 +1,64 @@
+package com.example.demo.controllers;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Area;
+import com.example.demo.entities.Facility;
+import com.example.demo.entities.Owner;
+import com.example.demo.entities.Property;
+import com.example.demo.entities.PropertyReg;
+import com.example.demo.entities.Property_facility;
+import com.example.demo.services.AreaService;
+import com.example.demo.services.FacilityService;
+import com.example.demo.services.OwnerService;
+import com.example.demo.services.PropertyService;
+import com.example.demo.services.Property_facilityService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class PropertyController {
+	@Autowired
+	PropertyService prop_service;
+	@Autowired
+	AreaService a_service;
+	@Autowired
+	FacilityService f_service;
+	@Autowired
+	Property_facilityService pf_service;
+	@Autowired
+	OwnerService o_service;
+	
+	@GetMapping("/properties")
+	public Iterable<Property> getAll()
+	{
+		return prop_service.getAll();
+	}
+	
+	
+	@PostMapping("/saveProperty")
+	public Property saveProperty(@RequestBody PropertyReg propReg)
+	{
+		System.out.println(propReg);
+		 Area a = a_service.getArea(propReg.getArea_id());
+		 Owner o = o_service.getOwner(propReg.getOwner_id());
+		 
+		 
+		Property p = new Property(propReg.getName(), a, propReg.getDescription(), propReg.getPrice(), propReg.getCapacity(), propReg.getNo_of_occupants(),o);
+		System.out.println(p);
+	/*	Facility f = f_service.getFacility(propReg.getFacility_id());
+		Property p1= prop_service.getProperty(propReg.getProperty_id());
+		Property_facility pf = new Property_facility(p1,f);
+		
+		Property_facility psaved = pf_service.save(pf);
+		*/
+		return prop_service.saveProperty(p);
+		
+	}
+}

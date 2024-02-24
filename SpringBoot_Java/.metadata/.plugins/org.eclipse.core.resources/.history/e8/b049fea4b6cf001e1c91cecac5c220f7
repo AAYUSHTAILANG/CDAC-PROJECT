@@ -1,0 +1,23 @@
+package com.example.demo.repository;
+
+
+
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Facility;
+import com.example.demo.entities.Property;
+
+@Repository
+public interface FacilityRepository extends CrudRepository<Facility, Integer> {
+	
+	@Query("select f from Facility f where property_id = :property_id")
+	public List<Facility> findByPropertyId(Property property);
+
+	
+	
+}

@@ -1,0 +1,48 @@
+package com.example.demo.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.LoginCheck;
+import com.example.demo.entities.Occupant_approval;
+import com.example.demo.entities.Roles;
+import com.example.demo.entities.Users;
+import com.example.demo.services.RolesService;
+import com.example.demo.services.UsersService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController 
+public class UsersController {
+	
+	@Autowired
+	UsersService users_service;
+	
+	@Autowired
+	RolesService rs;
+	
+	@PostMapping("/checkLogin")
+	public Users checkLogin(@RequestBody LoginCheck lcheck)
+	{
+		return users_service.getLogin(lcheck.getUser_email(), lcheck.getUser_password());
+	}
+	
+	/*public List<Users> getRequestByOwner(@RequestBody int uid)
+	{
+		Users u = users_service.getOne(uid);
+		return users_service.getRequestFromOwner(u);
+	}*/
+
+	@GetMapping("/getOwnerRequest/{roleId}")
+	public List<Users> getOwnerRequest(@PathVariable int roleId) {
+        Roles role = rs.getRole(roleId);
+
+        return users_service.getOwnerRequest(role);
+	}
+}

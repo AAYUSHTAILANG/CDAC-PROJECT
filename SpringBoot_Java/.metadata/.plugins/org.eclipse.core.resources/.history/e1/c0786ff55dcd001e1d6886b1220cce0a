@@ -1,0 +1,49 @@
+package com.example.demo.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Facility;
+import com.example.demo.entities.ProFacility;
+import com.example.demo.entities.Property;
+import com.example.demo.entities.PropertyReg;
+import com.example.demo.entities.Property_facility;
+import com.example.demo.services.FacilityService;
+import com.example.demo.services.PropertyService;
+import com.example.demo.services.Property_facilityService;
+
+@CrossOrigin(origins="http://localhost:3000")
+@RestController
+public class Property_facilityController {
+	@Autowired
+	Property_facilityService prop_fac_serv;
+	@Autowired
+	FacilityService fservice;
+	@Autowired
+	PropertyService pservice;
+	
+	@PostMapping("/addFacility")
+	public List<Property_facility> addFacility(@RequestBody  List<ProFacility> profacList)
+	{
+		System.out.println(profacList);
+		 List<Property_facility> arrlist = new ArrayList()<>();
+		 for (ProFacility profac : profacList) {
+	            Property p = pservice.getProperty(profac.getProperty_id());
+	            Facility f = fservice.getFacility(profac.getFacility_id());
+	           
+	                Property_facility pf = new Property_facility(p, f);
+	                arrlist.add(prop_fac_serv.savePF(pf));
+	            
+	        }
+		
+		return arrlist;
+		
+	}
+
+}

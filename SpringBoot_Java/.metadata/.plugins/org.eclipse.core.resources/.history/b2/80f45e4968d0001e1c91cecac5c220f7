@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Occupant_approval;
+@Repository
+public interface Occupant_approvalRepository extends CrudRepository<Occupant_approval, Integer> {
+
+}

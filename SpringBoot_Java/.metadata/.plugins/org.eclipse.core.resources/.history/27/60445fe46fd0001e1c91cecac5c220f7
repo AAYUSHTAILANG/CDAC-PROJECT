@@ -1,0 +1,67 @@
+package com.example.demo.entities;
+
+import java.time.LocalDate;
+
+public class BookingDummy {
+
+	private int occupant_id;
+	private int property_id;
+	private LocalDate date;
+	private int deposite;
+	private String trans_id;
+	private LocalDate from;
+	private LocalDate to;
+	
+	public LocalDate getFrom() {
+		return from;
+	}
+	public void setFrom(LocalDate from) {
+		this.from = from;
+	}
+	public LocalDate getTo() {
+		return to;
+	}
+	public void setTo(LocalDate to) {
+		this.to = to;
+	}
+	public int getOccupant_id() {
+		return occupant_id;
+	}
+	public void setOccupant_id(int occupant_id) {
+		this.occupant_id = occupant_id;
+	}
+	public int getProperty_id() {
+		return property_id;
+	}
+	public void setProperty_id(int property_id) {
+		this.property_id = property_id;
+	}
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	public int getDeposite() {
+		return deposite;
+	}
+	public void setDeposite(int deposite) {
+		this.deposite = deposite;
+	}
+	
+	public String getTrans_id() {
+		return trans_id;
+	}
+	public void setTrans_id(String trans_id) {
+		this.trans_id = trans_id;
+	}
+	public BookingDummy() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+	
+}

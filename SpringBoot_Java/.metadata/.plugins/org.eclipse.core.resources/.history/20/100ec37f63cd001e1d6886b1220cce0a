@@ -1,0 +1,36 @@
+package com.example.demo.entities;
+
+import java.util.List;
+
+public class ProFacility {
+
+	 private List<Long> facility_id;
+	 private int property_id;
+	public int getProperty_id() {
+		return property_id;
+	}
+	public void setProperty_id(int property_id) {
+		this.property_id = property_id;
+	}
+	public int getFacility_id() {
+		return facility_id;
+	}
+	public void setFacility_id(int facility_id) {
+		this.facility_id = facility_id;
+	}
+	public ProFacility() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public ProFacility(int property_id, int facility_id) {
+		super();
+		this.property_id = property_id;
+		this.facility_id = facility_id;
+	}
+	@Override
+	public String toString() {
+		return "ProFacility [property_id=" + property_id + ", facility_id=" + facility_id + "]";
+	}
+	
+	
+}

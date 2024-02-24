@@ -1,0 +1,27 @@
+package com.example.demo.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.Occupant_approval;
+import com.example.demo.entities.Property;
+import com.example.demo.repository.Occupant_approvalRepository;
+
+@Service
+public class Occupant_approvalService {
+	@Autowired
+	Occupant_approvalRepository occ_app_repo;
+
+	public Occupant_approval saveRequest(Occupant_approval oa) {
+	
+		return occ_app_repo.save(oa);
+	}
+
+	public Occupant_approval updateRequest(Occupant_approval occa, int id) {
+		
+		Occupant_approval oa = occ_app_repo.findById(id).get();
+		oa.setApproval_status(1);
+		return occ_app_repo.save(oa);
+	}
+
+}

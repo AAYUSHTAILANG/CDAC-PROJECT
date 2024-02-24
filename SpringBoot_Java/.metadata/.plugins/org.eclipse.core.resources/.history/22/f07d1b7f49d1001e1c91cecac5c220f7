@@ -1,0 +1,16 @@
+package com.example.demo.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entities.Users;
+@Repository
+public interface UsersReopository extends JpaRepository<Users, Integer> {
+
+	@Query("select l from Users l where l.user_email = :user_email and l.user_password = :user_password")
+	public Optional<Users> getLogin(String user_email,String user_password);
+	
+}
